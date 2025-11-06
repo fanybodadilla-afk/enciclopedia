@@ -1,0 +1,1001 @@
+/* Importar fuente llamativa para el título */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* --- Variables de Color para Temas --- */
+:root {
+    --bg-color: #4d7e81;
+    --text-color: #1b1b1b;
+    --navbar-bg: #141414;
+    --navbar-text: white;
+    --article-bg: white;
+    --article-header-color: #0056b3;
+    --article-subheader-color: #555;
+    --article-border-color: #007bff;
+    --code-bg: #282c34;
+    --code-text: #abb2bf;
+    --back-to-top-bg: #333;
+    --back-to-top-text: white;
+    --search-result-bg-hover: #e0e0e0;
+    --about-button-border: white;
+    --about-button-hover-bg: white;
+    --about-button-hover-text: #333;
+}
+
+/* Asegurar que el HTML y el Body ocupen toda la altura */
+html, body {
+    height: 100%;
+}
+
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --navbar-bg: #1f1f1f;
+    --article-bg: #2c2c2c;
+    --article-header-color: #90caf9;
+    --article-subheader-color: #bbbbbb;
+    --article-border-color: #90caf9;
+    --code-bg: #222;
+    --back-to-top-bg: #555;
+    --search-result-bg-hover: #444;
+    --about-button-border: #aaa;
+    --about-button-hover-bg: #e0e0e0;
+    --about-button-hover-text: #1f1f1f;
+}
+
+/* Estilos Base y Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* --- ESTILOS PARA LA VENTANA DE BIENVENIDA --- */
+
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #8282d0ff; /* Color inicial, cambiará con JS */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* ESTO ES CLAVE para centrar el texto y botones */
+    z-index: 2000;
+    transition: opacity 0.5s ease-out, background-color 5s ease-in-out;
+    overflow: hidden; /* Oculta lo que se salga de la pantalla */
+}
+.welcome-content {
+    position: relative; 
+    z-index: 2002;
+}
+
+/* --- Nuevo Título de Bienvenida --- */
+.welcome-title {
+    font-family: 'Anton'; 
+    font-size: clamp(3rem, 12vw, 8rem); /* Tamaño de fuente adaptable */
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column; /* Apila los spans verticalmente */
+    align-items: center;
+    /* Cambiado a un color azul sólido */
+    color: #141760;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.title-part-1, .title-part-2 {
+    display: block;
+    opacity: 0;
+    animation: slideIn 1s forwards;
+    animation-delay: 0.2s;
+}
+.title-part-2 {
+    animation-delay: 0.5s;
+}
+
+/* Contenedor de la animación de logos en el fondo */
+#background-animation-container {
+    position: fixed; /* Cambiado a fixed para el efecto parallax */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Lo colocamos detrás de todo el contenido */
+    overflow: hidden;
+    will-change: transform; /* Pista de optimización para el navegador */
+}
+.floating-logo {
+    position: absolute;
+    opacity: 0.15; /* Hacemos los logos muy sutiles para no distraer */
+    will-change: transform; /* Pista de optimización para el navegador */
+}
+.welcome-buttons {
+    margin-top: 30px;
+    /* Añadido para centrar los botones */
+    display: flex;
+    justify-content: center;
+}
+/* Animación para el título */
+@keyframes slideIn {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Header y Navbar (se mantienen igual) */
+.navbar {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out; /* Transición para ocultar/mostrar */
+}
+
+/* Clase para ocultar la barra de navegación */
+.navbar--hidden {
+    transform: translateY(-100%);
+}
+
+.header-group {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--navbar-text);
+    margin-right: 20px;
+}
+.logo {
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+.team-info {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+.team-name {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.logo-school {
+    margin-right: 10px;
+}
+.logo-team {
+    height: 30px;
+    margin-right: 8px;
+}
+
+/* Contenedor de acciones de navegación (botón y búsqueda) */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-button {
+    color: var(--navbar-text);
+    text-decoration: none;
+    font-size: 0.9em; /* Más pequeño que el texto normal */
+    padding: 6px 12px;
+    border: 1px solid var(--about-button-border);
+    border-radius: 15px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.about-button:hover {
+    background-color: var(--about-button-hover-bg);
+    color: var(--about-button-hover-text);
+}
+
+/* --- Estilos para los botones de navegación --- */
+.nav-button {
+    background-color: #007bff; /* Fondo azul */
+    color: white !important; /* Letras blancas, !important para sobreescribir otros estilos */
+    border: 2px solid #0056b3; /* Marco azul oscuro */
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-transform: uppercase; /* Letras en mayúsculas */
+    font-weight: bold;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: inline-block; /* Asegura que el padding y border se apliquen bien */
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    border-color: #004494;
+}
+
+/* --- Interruptor de Tema --- */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.theme-switcher-label {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Búsqueda (se mantienen igual) */
+
+.search-container {
+    position: relative; /* Mantiene la posición para el dropdown */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea los elementos a la derecha */
+}
+#searchInput {
+    width: 0;
+    padding: 8px 0;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    opacity: 0;
+    transition: width 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+    order: 1; /* El input va antes que el botón visualmente */
+}
+.search-container.active #searchInput {
+    width: 300px;
+    padding: 8px 15px;
+    opacity: 1;
+    border: 1px solid #ccc;
+}
+.search-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1.5em;
+    color: var(--navbar-text);
+    order: 2; /* El botón va después del input visualmente */
+    z-index: 1;
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Alineado a la derecha con el contenedor */
+    width: 300px; /* Ancho fijo para coincidir con el input expandido */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    background-color: var(--article-bg);
+}
+.search-result-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+}
+.search-result-item:hover {
+    background-color: var(--search-result-bg-hover);
+}
+body.dark-theme .search-results-dropdown {
+    border-color: #555;
+}
+/* Contenido Principal */
+#mainContent {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    position: relative; /* Necesario para que el z-index funcione correctamente */
+    z-index: 1; /* Asegura que el contenido esté sobre el fondo animado */
+}
+/* Contenedor de la vista de inicio (HOME-VIEW) */
+.home-view {
+    /* Necesita fondo transparente para ver el cambio de color del body */
+    background-color: transparent;
+}
+/* Grid de Tarjetas de Inicio (4x4x3, Rectangular, 3D) */
+.home-grid-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* --- Estilos para el efecto Flip de las Tarjetas --- */
+.card-container {
+    width: 100%;
+    max-width: 240px;
+    height: 140px;
+    perspective: 1000px; /* Perspectiva para el efecto 3D */
+}
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+}
+.card-container:hover .card {
+    transform: rotateY(180deg);
+}
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la cara trasera del elemento */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    background-color: var(--lang-color, #007bff);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.card-back {
+    transform: rotateY(180deg);
+}
+.card-back p {
+    font-size: 0.85em;
+    margin: 0;
+}
+
+/* ESTILO PARA LA IMAGEN EN LA TARJETA (.lang-logo) */
+.lang-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+.card-front h2 {
+    font-size: 1.2em;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+/* ------------------------------------------------ */
+
+/* --- Botón de Comparar en Tarjetas --- */
+.compare-btn {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+    z-index: 20;
+}
+.card-container:hover .compare-btn {
+    opacity: 1;
+    bottom: 5px;
+}
+.compare-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- Barra de Comparación Flotante --- */
+#compare-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    z-index: 1500;
+}
+.compare-bar-item {
+    background-color: rgba(255,255,255,0.1);
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+#compare-now-btn:disabled {
+    background-color: #555;
+    border-color: #444;
+    cursor: not-allowed;
+}
+
+/* --- Vista de Tabla Comparativa --- */
+.table-container {
+    overflow-x: auto; /* Para que la tabla sea responsive en móviles */
+}
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.compare-table th, .compare-table td {
+    padding: 12px 15px;
+    border: 1px solid var(--article-border-color);
+    text-align: left;
+}
+.compare-table th {
+    background-color: var(--article-header-color);
+    color: white;
+}
+.compare-table tbody tr:nth-child(even) {
+    background-color: rgba(0,0,0,0.03);
+}
+
+/* --- Layout para Artículo y TOC --- */
+.article-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.article-view {
+    flex: 1; /* Ocupa el espacio principal */
+    min-width: 0; /* Soluciona problemas de flexbox con contenido largo */
+}
+
+/* --- Estilos para el Índice (TOC) Flotante --- */
+.toc-container {
+    width: 220px;
+    flex-shrink: 0; /* Evita que el TOC se encoja */
+    position: sticky;
+    top: 80px; /* Distancia desde la parte superior (altura de la navbar + un margen) */
+    padding: 15px;
+    background-color: var(--article-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    border: 1px solid var(--article-border-color);
+}
+
+.toc-container h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: var(--article-header-color);
+    border-bottom: 2px solid var(--article-border-color);
+    padding-bottom: 8px;
+}
+
+.toc-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-container li a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding: 8px 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.toc-container li a:hover {
+    background-color: var(--search-result-bg-hover);
+}
+
+/* Nuevo: Estilo para el enlace activo en el TOC */
+.toc-container li a.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+/* --- VISTA DE ARTÍCULO --- */
+/* ------------------------------------------------ */
+.article-view {
+    background-color: var(--article-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.article-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.article-header h1 {
+    color: var(--article-header-color);
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+}
+.article-logo-large {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+.article-view h3 {
+    color: var(--article-subheader-color);
+    margin-top: 25px;
+    border-left: 5px solid var(--article-border-color);
+    padding-left: 10px;
+}
+.code-container {
+    position: relative; /* Necesario para posicionar el botón de copiar */
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    white-space: pre;
+}
+
+/* --- Botón de Copiar Código --- */
+.copy-code-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, background-color 0.2s;
+    font-size: 0.8em;
+}
+.copy-code-btn:hover {
+    opacity: 1;
+}
+.copy-code-btn.copied {
+    background-color: #28a745; /* Verde para éxito */
+    opacity: 1;
+}
+
+/* Footer (se mantiene igual) */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    margin-top: 40px;
+}
+/* Responsividad (se mantiene igual) */
+
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .search-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .nav-actions {
+        width: 100%;
+        margin-top: 10px;
+        justify-content: space-between;
+    }
+    .logo-link h1 {
+        font-size: 1.2em;
+    }
+    .team-info {
+        padding-left: 0;
+        border-left: none;
+        margin-top: 10px;
+    }
+    #mainContent {
+        padding: 0 10px;
+    }
+    .home-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* Clase de utilidad para ocultar elementos */
+.hidden {
+    display: none !important;
+}
+
+/* --- Animación de Fade-in para las Vistas --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px); /* Sutil efecto de subida */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.view-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* --- Notificación Toast --- */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%); /* Inicia fuera de la pantalla */
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 3000; /* Por encima de todo */
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Se desliza a su posición */
+}
+
+/* --- Efecto de Onda (Ripple) --- */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none; /* Para que no interfiera con el clic */
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* --- Botón para Volver Arriba (Scroll to Top) --- */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--back-to-top-bg);
+    color: var(--back-to-top-text);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+    position: fixed; overflow: hidden; /* Para el efecto Ripple */
+}
+.back-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- Botón de Entrada Mejorado --- */
+.welcome-btn {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 15px 40px;
+    border: none;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    border-radius: 50px; /* Bordes redondeados */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+    margin: 0 10px; /* Añadido para separar los botones */
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+}
+
+/* Animación con retraso para cada botón */
+#btn-enter-encyclopedia {
+    animation-delay: 1s;
+}
+
+#btn-enter-about {
+    animation-delay: 1.2s; /* Un poco después del primero */
+}
+
+.welcome-btn:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Superposición para el comparador (similar al del quiz) */
+#comparison-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#comparison-container {
+    background-color: var(--article-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px; /* Más ancho para que quepa la tabla */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+#close-comparison-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Superposición para el quiz */
+#quiz-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Asegura que esté por encima de todo */
+}
+
+#quiz-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+#question {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+}
+
+.btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Clases para el estado de las respuestas */
+.btn.correct {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.btn.wrong {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+#close-quiz-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+}
+
+/* --- Estilos para Animaciones del Fin del Juego --- */
+
+#end-game-animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Para que no interfiera con los botones */
+    z-index: 0; /* Detrás del contenido del quiz */
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    background-color: #f00; /* Se cambiará con JS */
+    top: -20px; /* Empezar fuera de la pantalla */
+    animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(720deg);
+    }
+}
+
+.sad-face {
+    position: absolute;
+    font-size: 2.5em;
+    top: -40px;
+    animation: fall-sad 5s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes fall-sad {
+    to {
+        transform: translateY(105vh);
+    }
+}
+/* Estilos para el botón de favoritos en la vista de artículo */
+.favorite-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    position: relative; overflow: hidden; /* Para el efecto Ripple */
+    margin-top: 10px;
+}
+
+.favorite-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.favorite-btn.favorited {
+    background-color: #fff0f5; /* Un rosa claro */
+    border-color: #ffc0cb; /* Un rosa más fuerte */
+    color: #d63384;
+}
+
+/* Nuevo: Animación para el botón de favoritos */
+.favorite-btn.popping {
+    animation: favorite-pop 0.4s ease-out;
+}
+
+@keyframes favorite-pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Ajuste en el header del artículo para alinear el título y el botón */
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.article-header h1 {
+    margin-bottom: 0;
+}

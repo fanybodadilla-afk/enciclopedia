@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enciclopedia de Lenguajes de Programación</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ventana de Bienvenida -->
+    <div id="welcome-overlay">
+        <div class="welcome-content">
+            <h1 class="welcome-title">
+                <span class="title-part-1">Enciclopedia</span><span class="title-part-2">Digital</span>
+            </h1>
+            <div class="welcome-buttons">
+                <button id="btn-enter-encyclopedia" class="welcome-btn ripple-effect">Enciclopedia</button>
+                <button id="btn-enter-about" class="welcome-btn ripple-effect">Acerca del Equipo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal de la aplicación (inicialmente oculto) -->
+    <header class="navbar hidden">
+        <div class="header-group">
+            <a href="#" class="logo-link">
+                <img src="https://scp.cobaej.edu.mx/assets/icons/logo.png" alt="Logo de la Escuela" class="logo logo-school">
+                <h1>ENCICLOPEDIA DIGITAL</h1>
+            </a>
+            <div class="team-info">
+                <img src="assets/team-logo.jpg" alt="Logo del Equipo" class="logo logo-team">
+                <span class="team-name">JORDAN Y SU EQUIPO</span>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <!-- Enlaces de navegación unificados -->
+            <a href="#" class="nav-button favorites-button ripple-effect">Favoritos ⭐</a>
+            <a href="#" class="nav-button about-button-nav ripple-effect">Acerca de</a>
+            <button id="start-game-btn" class="nav-button ripple-effect">Jugar Quiz</button>
+            <!-- Contenedor de búsqueda -->
+            <div class="search-container" id="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar lenguaje...">
+                <button class="search-icon-btn ripple-effect" id="search-toggle-btn" aria-label="Buscar lenguaje">
+                    <span aria-hidden="true">🔍</span>
+                </button>
+                <div id="searchResults" class="search-results-dropdown"></div>
+            </div>
+        </div>
+    </header>
+    <main id="mainContent" class="hidden"></main>
+
+
+    <!-- Contenedor del Juego (Quiz) -->
+    <div id="quiz-overlay" class="hidden">
+        <div id="quiz-container">
+            <!-- Contenedor para las animaciones de fin de juego -->
+            <div id="end-game-animation-container"></div>
+            <h2 id="question">Aquí va la pregunta</h2>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Respuesta 1</button>
+                <button class="btn">Respuesta 2</button>
+                <button class="btn">Respuesta 3</button>
+                <button class="btn">Respuesta 4</button>
+            </div>
+            <button id="close-quiz-btn" class="ripple-effect" aria-label="Cerrar quiz">×</button>
+        </div>
+    </div>
+
+    <!-- Contenedor del Comparador (Modal) -->
+    <div id="comparison-overlay" class="hidden">
+        <div id="comparison-container">
+            <button id="close-comparison-btn" class="ripple-effect" aria-label="Cerrar comparador">×</button>
+            <div id="comparison-content"></div>
+        </div>
+    </div>
+
+    <footer class="footer hidden">
+        <p>&copy; <span id="footer-year">2025</span> Jordan y su equipo | Clase de Programación - 5to Semestre</p>
+    </footer>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
